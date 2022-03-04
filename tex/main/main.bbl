@@ -1,0 +1,14 @@
+\begin{thebibliography}{1}
+
+\bibitem{Directions}
+W.~Diffie and M.~Hellman.
+\newblock New directions in cryptography.
+\newblock {\em IEEE Transactions on Information Theory}, 22(6):644--654, 1976.
+
+\bibitem{RSA}
+R.L. Rivest, A.~Shamir, and L.~Adleman.
+\newblock A method for obtaining digital signatures and public-key
+  cryptosystems.
+\newblock {\em Communications of the ACM}, 21:120--126, 1978.
+
+\end{thebibliography}
