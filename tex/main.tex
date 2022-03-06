@@ -2,6 +2,7 @@
 \usepackage{cite}
 \usepackage{amsmath, amssymb, amsthm}
 \usepackage{mathtools}
+\newtheorem{theorem}{Theorem}
 \author{
     {\bf Jack Griffiths,}
     {\bf Max Johnson,}
@@ -69,7 +70,6 @@ This signature algorithm is very rarely used, in favour of DSA, or ECDSA [citati
 \newpage
 \section{The Proposed Cryptosystem}
 \subsection{Definitions}
-Preamble
 \[ E(M) \equiv M^e \: (mod \: n),\;\;\; D(M) \equiv M^d \: (mod \: n)\]
 with $ n \coloneqq p \cdot q $ and $p, q$ are prime, and $e^{-1} \equiv d \: (mod \: \phi (n))$. \\
 In order to generate a private and public key, we first need to find 2 large primes $p, q$.
@@ -82,43 +82,80 @@ We can then compute $e \equiv d^{-1} \: (mod \: \phi(n))$,
 and publicly send $(e, n)$ without revealing $d$.
 
 \subsection{Proof}
-\subsubsection{Lemma 1}
-\textbf{Statement:} if $p, q$ are prime, then $\phi(p \cdot q) = (p-1) \cdot (q-1)$ \\\\
-\textbf{Proof:} \\
-Since $p, q$ are prime, $pq$ only has factors $\{1, p, q, p \cdot q\}$.
-So for any $d$ which is \emph{not} coprime to $p \cdot q$, that is $gcd(d, p \cdot q) = k$,
-then $d$ is of the form $d=k \cdot q$ or $d= k \cdot p$. \\
-There are exactly $p-1$ values of $k$ such that $0 < k \cdot q < p \cdot q$,
-and exactly $q-1$ values of $k$ such that  $0 < k \cdot p < p \cdot q$.
-So the number of naturals less than $p \cdot q$ which \emph{are} coprime to $p \cdot q$ is $(p-1) + (q-1)$. Let's call this $\phi^{'}(n)$\\
-$\phi(n)$ is the number of naturals less than $n$ which are \emph{not} coprime to $n$,
-\begin{align*}
-    \phi(n)        & = (n-1) - \phi^{'}(n)                           \\
-    \phi(p\cdot q) & = (p \cdot q - 1) - \left( (p-1) + (q-1)\right) \\
-                   & = p \cdot q - 1 - p + 1 - q + 1                 \\
-                   & = p \cdot q - p - q + 1                         \\
-                   & = (p-1) \cdot (q-1)  \;\;\;\; \blacksquare
-\end{align*}
-\subsubsection{Lemma 2}
-\textbf{Statement:} Fermat's Little Theorem \\
-\textbf{Proof:}\\
-Later
-\newpage
-\textbf{Statement:} If $p, q$ and $n \coloneqq p \cdot q$, then for any $d \equiv e^{-1} \: (mod \: \phi(n))$
-\[ E(M) \equiv M^e \: (mod \: n),\;\;\; D(M) \equiv M^d \: (mod \: n)
-\]
-\[ \Downarrow \]
-\[  D(E(M)) \equiv M \: (mod \: n) \equiv E(D(M)) \: (mod \: n)
-\]
-\textbf{Proof:} \\
-If a prime $p$ does not divide $M$,
-$M^ {\phi(p)} \equiv M^ {p-1} \: (mod \: p) \equiv 1 \: (mod \: p)$ by Fermat's Little Theorem \\
-Since $\phi(p)$ divides $\phi(n)$, $M^{\phi(p)} \equiv M^{k \phi(n)} \: (mod \: p) \equiv 1 \: (mod \: p)$
-By multiplying by $M$, $M^p \equiv M \:(mod \: p)$.
-\\ By the Chinese Remainder Theroem: \\
-$M^{k \phi(n) + 1} \equiv M \: (mod \: p),\; M^{k \phi(n) + 1} \equiv M \: (mod \: q) \Rightarrow M^{k \phi (n) + 1} \equiv M \: (mod \: n)$\\
-Therefore if $e \cdot d = k \phi(n) + 1$, that is $e \cdot d \equiv 1 \: (mod \: \phi(n))$, or $e \equiv d^{-1} \: (mod \: \phi(n))$ \\
-then $D(E(M)) = (M^{e})^{d} = M^{e \cdot d} \equiv M \: (mod \: n)$
+\begin{theorem}
+    If $p, q$ are prime, then $\phi(p \cdot q) = (p-1) \cdot (q-1)$
+    \begin{proof}
+        Since $p, q$ are prime, $pq$ only has factors $\{1, p, q, p \cdot q\}$, so for any $d$ which is not coprime to $p \cdot q$
+        \begin{align*}
+             & \text{Let }k \coloneqq gcd(d, p \cdot q) \;, k \neq 1 \text{ since } d \text{ is not coprime to } p \cdot q \\
+             & d = k \cdot 1 \text{, or } d = k \cdot p \text{, or } d = k \cdot q
+        \end{align*}
+        In the first case, for $d$ to divide $p \cdot q$, $k$ must be $p$ or $q$ since $p, q$ are prime.
+        Both of these are covered in the $d = k \cdot p$ or $d = k \cdot q$ cases. \\
+        Let's define $\phi^{'}(n)$ to be the cototient of $n$,
+        \[
+            \phi^{'}(n) \coloneqq n - \phi(n)
+        \]
+        $\phi^{'}(n)$ is the number of naturals \emph{less than} or equal to n which are \emph{not} coprime to n.
+        That is, $\phi^{'}(n)$ is the number of values of $k$ such that $0 < d \leq p \cdot q$.
+        \begin{align*}
+            0 & < k \cdot p \leq p \cdot q \Rightarrow 1 \leq k < q \Rightarrow k \in \left\{ 2, 3, \ldots, q \right\} \text{ since } k \neq 1 \\
+            0 & < k \cdot q \leq p \cdot q \Rightarrow 1 \leq k < p \Rightarrow k \in \left\{ 2, 3, \ldots, p \right\} \text{ since } k \neq 1 \\
+            0 & < k \cdot 1 \leq p \cdot q \Rightarrow k \in \left\{ p,\: q,\: p \cdot q \right\}
+        \end{align*}
+        So $\phi^{'}(n)$ is the sum of the cardinality of these sets.
+        \begin{align*}
+            \phi^{'}(p \cdot q)         & = \left| p,\: q,\: p\cdot q \right| + \left| 2, 3, \ldots, p  \right| + \left| 2, 3, \ldots, q \right| \\
+                                        & = 3 + (p-1) + (q-1)  = p + q - 1                                                                       \\
+            \Rightarrow \phi(p \cdot q) & = p \cdot q - (p + q - 1) = p \cdot q - p - q + 1                                                      \\
+                                        & = (p-1) \cdot (q-1)
+        \end{align*}
+
+    \end{proof}
+\end{theorem}
+
+\begin{theorem}
+    Fermat's Little Theorem
+    \begin{proof}
+        To be done
+    \end{proof}
+\end{theorem}
+
+\begin{theorem}
+    If $p, q$ are prime and $n \coloneqq p \cdot q$, then for any $d \equiv e^{-1} \: (mod \: \phi(n))$
+    \[ E(M) \equiv M^e \: (mod \: n),\;\;\; D(M) \equiv M^d \: (mod \: n)
+    \]
+    \[ \Downarrow \]
+    \[  D(E(M)) \equiv M \: (mod \: n) \equiv E(D(M)) \: (mod \: n)
+    \]
+    \begin{proof}
+        If a prime $p$ does not divide $M$,
+        \begin{align*}
+            M^ {\phi(p)} & \equiv M^ {p-1} \: (mod \: p) \equiv 1 \: (mod \: p) \tag{\emph{by Fermat's Little Theorem}}             \\
+                         & \equiv M^{k \phi(n)} \: (mod \: p) \equiv 1 \: (mod \: p) \tag{\emph{Since $\phi(p)$ divides $\phi(n)$}} \\
+            M^{p}        & \equiv M ^{k \phi(n) + 1}\: (mod \: p) \equiv M \: (mod \: p) \tag{\emph{By multiplying by $M$}}
+        \end{align*}
+        The same can be argued for $q$ \\\\
+        By the Chinese Remainder Theroem: \\
+        \[
+            \begin{rcases*}
+                M^{k \phi(n) + 1} \equiv M \: (mod \: p) \\
+                M^{k \phi(n) + 1} \equiv M \: (mod \: q)
+            \end{rcases*}
+            \Rightarrow
+            M^{k \phi (n) + 1} \equiv M \: (mod \: n)
+        \]
+        By definition, $e \equiv d ^{-1} \: (mod \: n)$, so
+        \begin{align*}
+            e \cdot d           & \equiv 1 \: (mod \: \phi(n))                      \\
+            e \cdot d           & = k \phi(n) + 1 \tag{for some $k \in \mathbb{N}$} \\
+            \Rightarrow D(E(M)) & \equiv M ^ {e \cdot d} \: (mod \: n)              \\
+                                & \equiv M^{k \cdot \phi(n) + 1} \: (mod \: n)      \\
+                                & \equiv M \: (mod \: n)
+        \end{align*}
+    \end{proof}
+\end{theorem}
+
 \newpage
 \bibliographystyle{plain} % We choose the "plain" reference style
 \bibliography{refs} % Entries are in the refs.bib file
