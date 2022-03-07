@@ -67,6 +67,52 @@ This can be optimised by hashing (a one way map) the message before decrypting i
 Since hashes are a fixed length we can require the hash to be smaller than the size of a message block,
 and only need to transmit one more block instead of twice as many.
 This signature algorithm is very rarely used, in favour of DSA, or ECDSA [citation needed].
+
+\subsubsection{Blockchain}
+At its core, a blockchain is a long text file that lots of people have access to (a distributed ledger).
+But how can one ensure that Alice did in fact send Bob something.
+Alice can sign her transaction with her public key.
+Her public key is typically her address, or identifier within the network,
+so we know the person who has the private key to the "account"
+something was initially sent to has signed the transaction.
+
+However, more utility can be gained using mutli-sig.
+All $n$ members of a group who want to exchange some thing broadcast this to the blockchain.
+To do this, any one member of the group can submit $n$ public keys to the network, not necessarily including their own.
+On creation, the creator tells the network how many group members need to agree to move funds.
+
+\subsubsection{PGP}
+PGP - Pretty Good Privacy - is an open source set of standards to
+encrypt and decrpyt messages, and create a "web of trust".
+
+To encrypt, first the encrypter generates a random (symmetric) encryption key.
+The message is encrypted with this key,
+and the key is encrypted with each of the recievers' private keys.
+Each of these reciever-specific encrypted keys is prefixed with the
+reciever's fingerprint - a shorter representation of their private key.
+
+To decrypt, the reciever locates their fingerprint, and decrypts the corresponding message.
+They then use the message in this key to decrypt the main message.
+
+PGP also offers signatures, which can be done with either RSA or DSA.
+Since any message can be signed, other people's public keys can be signed.
+PGP creates a "web of trust" by allowing users to publish a signed public key.
+If a large number of people you trust (read people whose private key you have)
+sign a public key, you can be reasonably convinced the public key is legitimate.
+\subsubsection{TLS}
+TLS - Transport Layer Security - is responsible for securing HTTP communications.
+TLS relies on no single encryption or signature standard, instead agreeing a "cipher suite" as its first step.
+To convince your browser you're speaking to the right server,
+the server sends a signed message (certificate) including information about who they are,
+and a message "vouching" for the certificate's legitimiacy.
+These "vouches" are signatures by Certificate Authorities: entities that are trusted to sign certificates.
+
+Now the client knows the server is who they say they are,
+they can either choose a random number, encrypt it with the server's public key and send it.
+This is now the symmetric key.
+Or, they can perform Diffie-Hellman Key Exchange \cite{Directions}.
+The second methodi is preferred since should the server's private key be compromised,
+no communications can be decrypred.
 \newpage
 \section{The Proposed Cryptosystem}
 \subsection{Definitions}
@@ -180,6 +226,18 @@ the largest number we need to store will necessarily be less than $n$.
 We only need to store the running total, and the current square ($e$ is given to us).
 So we only need to store 2 $n$-sized blocks.
 \subsubsection{Prime Generation}
+There are a variety of prime generation algorithms,
+but we will only consider the probabilistic method in RSA's paper.
+If $a$ is prime less than $a$, then:
+\[
+    gcd(a,b) = 1, \text{ and } J(a, b) \equiv a^{(b-1)/2} (mod b)
+\]
+Where $J$ is the Jacobi symbol.
+However, this is also true with probability $\frac{1}{2}$ when $b$ is not prime.
+So if we test $r$ values of $a$, and the equations are valid for each $a$ we choose,
+there is only a $(\frac{1}{2})^{100} \approx \frac{1}{1.26 \cdot 10^{30}}$ chance $b$ is not prime.
+Other algorithms exist, and in our implementation, we used python's \texttt{Crypto.Util.number.getPrime},
+which generates a random number and checks it with a probabilistic sieve.
 \newpage
 \bibliographystyle{plain} % We choose the "plain" reference style
 \bibliography{refs} % Entries are in the refs.bib file
