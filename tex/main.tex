@@ -99,15 +99,16 @@ and publicly send $(e, n)$ without revealing $d$.
         $\phi^{'}(n)$ is the number of naturals \emph{less than} or equal to n which are \emph{not} coprime to n.
         That is, $\phi^{'}(n)$ is the number of values of $k$ such that $0 < d \leq p \cdot q$.
         \begin{align*}
-            0 & < k \cdot p \leq p \cdot q \Rightarrow 1 \leq k < q \Rightarrow k \in \left\{ 2, 3, \ldots, q \right\} \text{ since } k \neq 1 \\
-            0 & < k \cdot q \leq p \cdot q \Rightarrow 1 \leq k < p \Rightarrow k \in \left\{ 2, 3, \ldots, p \right\} \text{ since } k \neq 1 \\
-            0 & < k \cdot 1 \leq p \cdot q \Rightarrow k \in \left\{ p,\: q,\: p \cdot q \right\}
+            0 & < k \cdot p \leq p \cdot q \Rightarrow k \in \left\{ 2, 3, \ldots, q \right\},     d \in \left\{2p,   3p, \ldots, (q-1) \cdot p, \; q \cdot p \right\} \\
+            0 & < k \cdot q \leq p \cdot q \Rightarrow k \in \left\{ 2, 3, \ldots, p \right\},     d \in \left\{2q,   3q, \ldots, (p-1) \cdot q, \; p \cdot q \right\} \\
+            0 & < k \cdot 1 \leq p \cdot q \Rightarrow k \in \left\{ p,\: q,\: p \cdot q \right\}, d \in \left\{ p, \: q,                        \; p \cdot q \right\}
         \end{align*}
-        So $\phi^{'}(n)$ is the sum of the cardinality of these sets.
+        So $\phi^{'}(n)$ is the cardinality of the union of these sets
         \begin{align*}
-            \phi^{'}(p \cdot q)         & = \left| p,\: q,\: p\cdot q \right| + \left| 2, 3, \ldots, p  \right| + \left| 2, 3, \ldots, q \right| \\
-                                        & = 3 + (p-1) + (q-1)  = p + q - 1                                                                       \\
-            \Rightarrow \phi(p \cdot q) & = p \cdot q - (p + q - 1) = p \cdot q - p - q + 1                                                      \\
+            \phi^{'}(p \cdot q)         & = \left| \left\{p,\: q,\: p\cdot q \right\} \cup \left\{ 2p, 3p, \ldots, (q-1) \cdot p, q \cdot p \right\} \cup \left\{ 2, 3, \ldots,  (p-1) \cdot q, p \cdot q \right\} \right| \\
+                                        & = \left| p, 2p, 3p, \ldots, (q-1) \cdot p, \;\; q, 2q, 3q, \ldots, (p-1) \cdot q, \;\; p \cdot q\right|                                                                          \\
+                                        & = (q-1) + (p-1) + 1                                                                                                                                                              \\&= p + q - 1                                                                                                                                                  \\
+            \Rightarrow \phi(p \cdot q) & = p\cdot q - \phi^{'}(n)                                                                                                                                                         \\&= p \cdot q - (p + q - 1) = p \cdot q - p - q + 1                                                                                                        \\
                                         & = (p-1) \cdot (q-1)
         \end{align*}
 
@@ -155,7 +156,30 @@ and publicly send $(e, n)$ without revealing $d$.
         \end{align*}
     \end{proof}
 \end{theorem}
-
+\newpage
+\subsection{Efficient Computation}
+\subsubsection{Modular Exponentiation}
+Consider the binary representation of some exponent $e$:
+\[ e = 2^0 \cdot e_0 + 2^1 \cdot e_1 + \ldots + 2^n \cdot e_n \]
+By the rules of indicies,
+\begin{align*}
+    M^e & = M^{2^0 \cdot e_0 + 2^1 \cdot e_1 + \ldots + 2^n \cdot e_n}          \\
+        & = M^{2^0 \cdot e_0} \cdot M^{ 2^1 \cdot e_1} \cdots M^{2^n \cdot e_n}
+\end{align*}
+So in a ring $\mathbb{Z} / n \mathbb{Z}$,
+\begin{align*}
+    M^e & \equiv M^{2^0 \cdot e_0} \cdot M^{ 2^1 \cdot e_1} \cdots M^{2^n \cdot e_n} \; (mod \; n)                                                  \\
+        & \equiv ( M^{2^0 \cdot e_0} \; (mod \; n)) \cdot  (M^{ 2^1 \cdot e_1} \; (mod \; n)) \cdots (M^{2^n \cdot e_n} \; (mod \; n))\; (mod \; n)
+\end{align*}
+We can easily generate the elements $M^{2^i e_i}$ by repeatedly squaring $M$.
+We only include this element if $e_i$ is $1$, that is the bit is true.
+So we only need to square $M$ $log_2(e)$ times,
+then perform at most $log_2(e)$ multiplications and remainder calculations.
+But space is where the main savings are:
+the largest number we need to store will necessarily be less than $n$.
+We only need to store the running total, and the current square ($e$ is given to us).
+So we only need to store 2 $n$-sized blocks.
+\subsubsection{Prime Generation}
 \newpage
 \bibliographystyle{plain} % We choose the "plain" reference style
 \bibliography{refs} % Entries are in the refs.bib file
