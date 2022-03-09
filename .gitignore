@@ -1,3 +1,9 @@
 __pycache__
-tex/main
-!tex/main/main.pdf
+
+tex/main/main.aux
+tex/main/main.bbl
+tex/main/main.blg
+tex/main/main.fdb_latexmk
+tex/main/main.fls
+tex/main/main.log
+tex/main/main.synctex.gz
