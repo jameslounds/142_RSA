@@ -1,3 +1,3 @@
 __pycache__
-tex/main/*.log
-luhn.py
+tex/main
+!tex/main/main.pdf

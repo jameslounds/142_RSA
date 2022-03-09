@@ -284,6 +284,7 @@ INPUT /usr/local/texlive/2021basic/texmf-dist/fonts/tfm/public/amsfonts/symbols/
 INPUT /usr/local/texlive/2021basic/texmf-dist/fonts/tfm/public/amsfonts/symbols/msbm10.tfm
 INPUT /usr/local/texlive/2021basic/texmf-dist/fonts/tfm/public/amsfonts/symbols/msbm7.tfm
 INPUT /usr/local/texlive/2021basic/texmf-dist/fonts/tfm/public/amsfonts/symbols/msbm5.tfm
+INPUT /usr/local/texlive/2021basic/texmf-dist/fonts/tfm/jknappen/ec/tcrm1000.tfm
 INPUT /usr/local/texlive/2021basic/texmf-dist/fonts/tfm/public/cm/cmbx10.tfm
 INPUT /usr/local/texlive/2021basic/texmf-dist/fonts/tfm/public/cm/cmtt10.tfm
 INPUT main/main.bbl
@@ -291,6 +292,7 @@ INPUT main/main.bbl
 INPUT main/main.bbl
 INPUT main/main.bbl
 INPUT main/main.aux
+INPUT /Users/james/Library/texlive/2021basic/texmf-var/fonts/pk/ljfour/jknappen/ec/tcrm1000.600pk
 INPUT /usr/local/texlive/2021basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb
 INPUT /usr/local/texlive/2021basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb
 INPUT /usr/local/texlive/2021basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb

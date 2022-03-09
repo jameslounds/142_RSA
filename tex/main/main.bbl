@@ -1,5 +1,10 @@
 \begin{thebibliography}{1}
 
+\bibitem{Reuters}
+Daniel R.~L. Brown.
+\newblock Conjectured security of the ansi-nist elliptic curve rng.
+\newblock {\em Reuters}, 2006.
+
 \bibitem{Directions}
 W.~Diffie and M.~Hellman.
 \newblock New directions in cryptography.
