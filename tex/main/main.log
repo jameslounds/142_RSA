@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2021) (preloaded format=pdflatex 2021.11.30)  9 MAR 2022 16:07
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2021) (preloaded format=pdflatex 2021.11.30)  9 MAR 2022 16:09
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -218,15 +218,15 @@ Underfull \hbox (badness 10000) in paragraph at lines 193--196
 
 [6] [7] (main/main.bbl) [8] (main/main.aux) ) 
 Here is how much of TeX's memory you used:
- 3085 strings out of 480445
- 43712 string characters out of 5892390
- 342868 words of memory out of 5000000
- 20335 multiletter control sequences out of 15000+600000
+ 3086 strings out of 480445
+ 43721 string characters out of 5892390
+ 342871 words of memory out of 5000000
+ 20336 multiletter control sequences out of 15000+600000
  412142 words of font info for 61 fonts, out of 8000000 for 9000
  319 hyphenation exceptions out of 8191
  70i,10n,77p,429b,263s stack positions out of 5000i,500n,10000p,200000b,80000s
  </Users/james/Library/texlive/2021basic/texmf-var/fonts/pk/ljfour/jknappen/ec/tcrm1000.600pk></usr/local/texlive/2021basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/local/texlive/2021basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/local/texlive/2021basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/local/texlive/2021basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/texlive/2021basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb></usr/local/texlive/2021basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/local/texlive/2021basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2021basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/local/texlive/2021basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/local/texlive/2021basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb></usr/local/texlive/2021basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/local/texlive/2021basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2021basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy5.pfb></usr/local/texlive/2021basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/local/texlive/2021basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/local/texlive/2021basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb></usr/local/texlive/2021basic/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on main/main.pdf (8 pages, 194795 bytes).
+Output written on main/main.pdf (8 pages, 195224 bytes).
 PDF statistics:
  104 PDF objects out of 1000 (max. 8388607)
  75 compressed objects within 1 object stream
