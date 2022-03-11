@@ -192,6 +192,28 @@ and publicly send $(e, n)$ without revealing $d$.
 \end{theorem}
 
 \begin{theorem}
+    If p, q are prime,
+    \[
+        \begin{rcases*}
+            a^b \equiv c \; (mod \; p) \\
+            a^b \equiv c \; (mod \; q)
+        \end{rcases*}
+        \Rightarrow
+        a^b \equiv c \; (mod \; p\cdot q)
+    \]
+
+    \begin{proof}
+        If $a^b \equiv c \; (mod \; p)$, then $a^b = k_1 \cdot p + c$, similarly with q, $a^b = k_2 \cdot q + c$
+        \begin{align*}
+            a^b & = k_1\cdot p + c = k_2 \cdot q + c, \tag{$k_1, k_2 \in \mathbb{Z}$}                                                             \\
+                & \Rightarrow k_1 \cdot p = k_2 \cdot q \Leftrightarrow k_1 = \alpha_1 \cdot q, k_2 = \alpha_2 \cdot p \tag{since p, q are prime} \\
+            a^b & = k_1 \cdot p + c = \alpha_1 \cdot p \cdot q + c = \alpha_2 \cdot p \cdot q + c                                                 \\
+            a^b & = \alpha_1 \cdot (p \cdot 1) + c \Leftrightarrow a^b \equiv c \; (mod \; p\cdot q)
+        \end{align*}
+    \end{proof}
+\end{theorem}
+
+\begin{theorem}
     If $p, q$ are prime and $n \coloneqq p \cdot q$, then for any $d \equiv e^{-1} \: (mod \: \phi(n))$
     \[ E(M) \equiv M^e \: (mod \: n),\;\;\; D(M) \equiv M^d \: (mod \: n)
     \]
@@ -206,7 +228,7 @@ and publicly send $(e, n)$ without revealing $d$.
             M^{p}        & \equiv M ^{k \phi(n) + 1}\: (mod \: p) \equiv M \: (mod \: p) \tag{\emph{By multiplying by $M$}}
         \end{align*}
         The same can be argued for $q$ \\\\
-        By the Chinese Remainder Theroem: \\
+        By Theroem 3: \\
         \[
             \begin{rcases*}
                 M^{k \phi(n) + 1} \equiv M \: (mod \: p) \\
@@ -261,7 +283,11 @@ So if we test $r$ values of $a$, and the equations are valid for each $a$ we cho
 there is only a $(\frac{1}{2})^{100} \approx \frac{1}{1.26 \cdot 10^{30}}$ chance $b$ is not prime.
 Other algorithms exist, and in our implementation, we used python's \texttt{Crypto.Util.number.getPrime},
 which generates a random number and checks it with a probabilistic sieve.
+
+\section{Examples}
+To be done
 \newpage
+
 \section{Code}
 The code can be found at \url{https://github.com/jameslounds/142_RSA}
 \bibliographystyle{plain} % We choose the "plain" reference style
