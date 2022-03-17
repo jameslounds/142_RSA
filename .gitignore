@@ -7,3 +7,6 @@ tex/main/main.fdb_latexmk
 tex/main/main.fls
 tex/main/main.log
 tex/main/main.synctex.gz
+tex/main/main.out
+tex/.DS_Store
+tex/main/.DS_Store
