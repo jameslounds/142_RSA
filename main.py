@@ -23,12 +23,12 @@ def generate_key_pair(p=None, q=None):
 
 
 def convert_string_to_message(string):
-    return int.from_bytes(hexlify(string.encode("utf-8")), "little")
+    return int.from_bytes(hexlify(string.encode("ascii")), "big")
 
 
 def convert_message_to_string(message):
-    message_bytes = message.to_bytes((message.bit_length() + 7) // 8, "little")
-    return unhexlify(message_bytes).decode("utf-8")
+    message_bytes = message.to_bytes((message.bit_length() + 7) // 8, "big")
+    return unhexlify(message_bytes).decode("ascii")
 
 
 def encrypt(e, n, plain_text_string):

@@ -1,0 +1,53 @@
+\begin{theorem}
+    If $p, q$ are prime, then $\phi(p \cdot q) = (p-1) \cdot (q-1)$.
+    \begin{proof}
+        Since $p, q$ are prime, $pq$ only has factors $\{1, p, q, p \cdot q\}$, so for any $d$ which is not coprime to $p \cdot q$.
+        \begin{align*}
+             & \text{Let }k \coloneqq gcd(d, p \cdot q) \;, k \neq 1 \text{ since } d \text{ is not coprime to } p \cdot q \\
+             & d = k \cdot 1 \text{, or } d = k \cdot p \text{, or } d = k \cdot q
+        \end{align*}
+        In the first case, for $d$ to divide $p \cdot q$, $k$ must be $p$ or $q$ since $p, q$ are prime.
+        % Both of these are covered in the $d = k \cdot p$ or $d = k \cdot q$ cases. \\
+        Let's define $\phi^{'}(n)$ to be the cototient of $n$,
+        \[
+            \phi^{'}(n) \coloneqq n - \phi(n)
+        \]
+        $\phi^{'}(n)$ is the number of naturals less than \emph{or equal} to n which are \emph{not} coprime to n.
+        That is, $\phi^{'}(n)$ is the number of values of $k$ such that $0 < d \leq p \cdot q$.
+        \begin{align*}
+            0 & < k \cdot p \leq p \cdot q \Rightarrow k \in \left\{ 2, 3, \ldots, q \right\},     d \in \left\{2p,   3p, \ldots, (q-1) \cdot p, \; q \cdot p \right\} \\
+            0 & < k \cdot q \leq p \cdot q \Rightarrow k \in \left\{ 2, 3, \ldots, p \right\},     d \in \left\{2q,   3q, \ldots, (p-1) \cdot q, \; p \cdot q \right\} \\
+            0 & < k \cdot 1 \leq p \cdot q \Rightarrow k \in \left\{ p,\: q,\: p \cdot q \right\}, d \in \left\{ p, \: q,                        \; p \cdot q \right\}
+        \end{align*}
+        So $\phi^{'}(n)$ is the cardinality of the union of these sets.
+        \begin{align*}
+            \phi^{'}(p \cdot q)         & = \left| \left\{p,\: q,\: p\cdot q \right\} \cup \left\{ 2p, 3p, \ldots, (q-1) \cdot p, q \cdot p \right\} \cup \left\{ 2, 3, \ldots,  (p-1) \cdot q, p \cdot q \right\} \right| \\
+                                        & = \left| p, 2p, 3p, \ldots, (q-1) \cdot p, \;\; q, 2q, 3q, \ldots, (p-1) \cdot q, \;\; p \cdot q\right|                                                                          \\
+                                        & = (q-1) + (p-1) + 1                                                                                                                                                              \\&= p + q - 1                                                                                                                                                  \\
+            \Rightarrow \phi(p \cdot q) & = p\cdot q - \phi^{'}(n)                                                                                                                                                         \\&= p \cdot q - (p + q - 1) = p \cdot q - p - q + 1                                                                                                        \\
+                                        & = (p-1) \cdot (q-1)
+        \end{align*}
+
+    \end{proof}
+\end{theorem}
+
+\begin{theorem}
+    Fermat's Little Theorem: \\
+    \hspace*{2.5cm} for a prime $p$,  $a ^{p-1} = 1 \; (mod \; p) \; \forall a \in \mathbb{Z}$.
+    \begin{proof}
+        Consider the first $p-1$ multiples of $a$,$\left\{a, 2a, 3a, \ldots, (p-1) a\right\}$ \\
+        Suppose for some $x, y$ that,
+        \[
+            x \cdot a \equiv y \cdot a \; (mod \; p) \Longleftrightarrow
+            x \equiv y \; (mod \; p)
+        \]
+        Therefore, each of the multiples aboce are distincy and nonzero,
+        that is they are congruent to $a, 2a, 3a, \ldots (p-1) \cdot a$
+        If we take the product of these congruences,
+        \begin{align*}
+                           & (a) \cdot (2a) \cdot (3a) \cdots ((p-1) \cdot a) \equiv 1 \cdot 2 \cdot 3 \cdot (p-1)\; (mod \; p)    \\
+            \Rightarrow \; & (a)^{p-1} \cdot (1 \cdot 2 \cdot 3 \cdots (p-1)) \equiv (1 \cdot 2 \cdot 3 \cdots (p-1) \; (mod \; p) \\
+            \Rightarrow \; & a^{p-1} \equiv 1 \; (mod \; p) \Longleftrightarrow a^p \equiv a \; (mod \; p)
+        \end{align*}
+    \end{proof}
+\end{theorem}
