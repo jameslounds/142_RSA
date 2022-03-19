@@ -204,10 +204,30 @@ Her public key is typically her address, or identifier within the network,
 so we know the person who has the private key to the "account"
 something was initially sent to has signed the transaction.
 
+A blockchain is a chain of blocks.
+A block is just some set of data (in Bitcoin's case, transaction data), wrapped with some extra metadata.
+To chain these, each block includes the hash of the previous block.
+With Proof Of Work \cite{Bitcoin}, "miners" compete to add some random data to the block,
+such that the resulting hash starts with a lot of $0$s.
+The best way to do this is to guess random data,
+and check if the hash starts with lots of $0$s.
+In order to mine, a miner must contribute significant computational effort to the network.
+
+However, a malevolent miner may attempt to "fork" the blockchain.
+That is, they create a competing chain with their malicious transaction included.
+For this to be accepted by the network (read people honestly following the protocol),
+the "forked" chain must be longer than the "honest" chain,
+requiring the malevolent actor to have more computing power than \emph{everyone} else mining.
+If more than $50\%$ of participants act honestly, the honest chain will be longer, and thus more valid.
+
 However, more utility can be gained using mutli-sig.
 All $n$ members of a group who want to exchange some thing broadcast this to the blockchain.
 To do this, any one member of the group can submit $n$ public keys to the network, not necessarily including their own.
 On creation, the creator tells the network how many group members need to agree to move funds.
+When the parties want to move the funds, for example after goods have been exchanged,
+$m$ parties sign the transaction.
+If the wallet is at most an "$m$ of $n$ wallet", then at most $m$ parties are
+enough to move the funds, so the network accepts the transaction.
 
 \subsection{PGP}
 PGP - Pretty Good Privacy - is an open source set of standards to
